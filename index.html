@@ -5,32 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>עילאי ושיראל - הזמנה</title>
     <style>
-        body { margin: 0; padding: 0; background-color: #fcfaf7; text-align: center; font-family: sans-serif; }
-        .invitation-header { width: 100%; display: block; line-height: 0; }
-        .invitation-header img { width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto; }
-        .rsvp-section { padding: 60px 20px; background-color: #ffffff; border-top: 1px solid #eee; }
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background-color: #fcfaf7; 
+            text-align: center; 
+            font-family: system-ui, -apple-system, sans-serif; 
+        }
+        
+        /* הצגת ההזמנה בראש הדף */
+        .invitation-header { 
+            width: 100%; 
+            display: block; 
+            background-color: #ffffff;
+            line-height: 0;
+        }
+        
+        .invitation-header img { 
+            width: 100%; 
+            max-width: 600px; 
+            height: auto; 
+            display: block; 
+            margin: 0 auto; 
+        }
+
+        /* חלק אישור ההגעה - מופיע רק בגלילה למטה */
+        .rsvp-section { 
+            padding: 60px 20px; 
+            background-color: #ffffff; 
+            border-top: 1px solid #eee;
+        }
+
         h2 { font-size: 2em; color: #b5952f; margin-bottom: 10px; }
-        #guest-greeting { font-size: 1.2em; margin-bottom: 30px; color: #333; }
-        .rsvp-buttons { display: flex; justify-content: center; gap: 15px; }
-        .rsvp-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 90px; height: 90px; border-radius: 50%; border: 2px solid #ff7a8a; background: none; color: #ff7a8a; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .rsvp-btn:active { background: #ff7a8a; color: white; }
+        #guest-greeting { font-size: 1.1em; margin-bottom: 35px; color: #333; }
+
+        .rsvp-buttons { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            flex-wrap: wrap;
+        }
+
+        .rsvp-btn { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            width: 90px; 
+            height: 90px; 
+            border-radius: 50%; 
+            border: 2px solid #ff7a8a; 
+            background-color: transparent; 
+            color: #ff7a8a; 
+            font-size: 0.9em; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+
+        .rsvp-btn:active { background-color: #ff7a8a; color: white; }
+        
         #hidden-rsvp-form { display: none; }
     </style>
 </head>
 <body>
 
     <div class="invitation-header">
-        <img src="https://i.ibb.co/v6W7p5y/final-invite.jpg" onerror="this.src='66122.jpg'" alt="הזמנה לחתונה">
+        <img src="https://i.ibb.co/v6W7p5y/final-invite.jpg" alt="הזמנה לחתונה">
     </div>
 
     <div class="rsvp-section">
         <h2>אישור הגעה</h2>
-        <p id="guest-greeting">אורח/ת יקר/ה, נשמח לראותכם!</p>
+        <p id="guest-greeting">אורח/ת יקר/ה, נשמח מאוד לראותכם!</p>
+        
         <div class="rsvp-buttons">
-            <button class="rsvp-btn" onclick="selectRSVP('אולי')"><span>❓</span><span>אולי</span></button>
-            <button class="rsvp-btn" onclick="selectRSVP('אגיע')"><span>✅</span><span>אגיע</span></button>
-            <button class="rsvp-btn" onclick="selectRSVP('לא אגיע')"><span>❌</span><span>לא אגיע</span></button>
+            <button class="rsvp-btn" type="button" onclick="selectRSVP('אולי')">
+                <span style="font-size: 1.5em;">❓</span>
+                <span>אולי</span>
+            </button>
+            <button class="rsvp-btn" type="button" onclick="selectRSVP('אגיע')">
+                <span style="font-size: 1.5em;">✅</span>
+                <span>אגיע</span>
+            </button>
+            <button class="rsvp-btn" type="button" onclick="selectRSVP('לא אגיע')">
+                <span style="font-size: 1.5em;">❌</span>
+                <span>לא אגיע</span>
+            </button>
         </div>
+
         <form action="https://formspree.io/f/YOUR_ID" method="POST" id="hidden-rsvp-form">
             <input type="hidden" id="hidden-name" name="שם האורח">
             <input type="hidden" id="hidden-status" name="סטטוס">
@@ -40,10 +102,12 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const guestName = urlParams.get('name');
+
         if (guestName) {
-            document.getElementById('guest-greeting').innerText = `היי ${guestName}, נשמח לראותכם בחתונה של עילאי ושיראל!`;
+            document.getElementById('guest-greeting').innerText = `היי ${guestName}, נשמח לראותכם!`;
             document.getElementById('hidden-name').value = guestName;
         }
+
         function selectRSVP(status) {
             document.getElementById('hidden-status').value = status;
             alert("תודה! התשובה נשלחה.");
