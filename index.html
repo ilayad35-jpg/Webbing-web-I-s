@@ -13,7 +13,7 @@
             font-family: system-ui, -apple-system, sans-serif; 
         }
         
-        /* הצגת ההזמנה בראש הדף */
+        /* חלק ההזמנה - נקי למעלה */
         .invitation-header { 
             width: 100%; 
             display: block; 
@@ -29,20 +29,20 @@
             margin: 0 auto; 
         }
 
-        /* חלק אישור ההגעה - מופיע רק בגלילה למטה */
+        /* חלק אישור ההגעה - מופיע רק בגלילה */
         .rsvp-section { 
             padding: 60px 20px; 
             background-color: #ffffff; 
             border-top: 1px solid #eee;
         }
 
-        h2 { font-size: 2em; color: #b5952f; margin-bottom: 10px; }
-        #guest-greeting { font-size: 1.1em; margin-bottom: 35px; color: #333; }
+        h2 { font-size: 2.2em; color: #b5952f; margin-bottom: 10px; }
+        #guest-greeting { font-size: 1.2em; margin-bottom: 40px; color: #333; }
 
         .rsvp-buttons { 
             display: flex; 
             justify-content: center; 
-            gap: 15px; 
+            gap: 20px; 
             flex-wrap: wrap;
         }
 
@@ -51,13 +51,13 @@
             flex-direction: column; 
             align-items: center; 
             justify-content: center; 
-            width: 90px; 
-            height: 90px; 
+            width: 100px; 
+            height: 100px; 
             border-radius: 50%; 
             border: 2px solid #ff7a8a; 
             background-color: transparent; 
             color: #ff7a8a; 
-            font-size: 0.9em; 
+            font-size: 1em; 
             font-weight: bold; 
             cursor: pointer; 
             transition: 0.3s; 
@@ -79,15 +79,15 @@
         <p id="guest-greeting">אורח/ת יקר/ה, נשמח מאוד לראותכם!</p>
         
         <div class="rsvp-buttons">
-            <button class="rsvp-btn" type="button" onclick="selectRSVP('אולי')">
+            <button class="rsvp-btn" type="button" onclick="selectRSVP('אולי מגיע')">
                 <span style="font-size: 1.5em;">❓</span>
                 <span>אולי</span>
             </button>
-            <button class="rsvp-btn" type="button" onclick="selectRSVP('אגיע')">
+            <button class="rsvp-btn" type="button" onclick="selectRSVP('מגיע בשמחה')">
                 <span style="font-size: 1.5em;">✅</span>
                 <span>אגיע</span>
             </button>
-            <button class="rsvp-btn" type="button" onclick="selectRSVP('לא אגיע')">
+            <button class="rsvp-btn" type="button" onclick="selectRSVP('לא יכול להגיע')">
                 <span style="font-size: 1.5em;">❌</span>
                 <span>לא אגיע</span>
             </button>
@@ -100,6 +100,22 @@
     </div>
 
     <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const guestName = urlParams.get('name');
+
+        if (guestName) {
+            document.getElementById('guest-greeting').innerText = `היי ${guestName}, נשמח לראותכם!`;
+            document.getElementById('hidden-name').value = guestName;
+        }
+
+        function selectRSVP(status) {
+            document.getElementById('hidden-status').value = status;
+            alert("תודה! התשובה נשלחה.");
+            document.getElementById('hidden-rsvp-form').submit();
+        }
+    </script>
+</body>
+</html>
         const urlParams = new URLSearchParams(window.location.search);
         const guestName = urlParams.get('name');
 
