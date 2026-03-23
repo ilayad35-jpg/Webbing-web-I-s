@@ -11,13 +11,14 @@
             background-color: #fcfaf7; 
             text-align: center; 
             font-family: sans-serif; 
+            overflow-x: hidden;
         }
         
-        /* חלק ההזמנה - נקי למעלה */
+        /* חלק ההזמנה - נקי לגמרי ותופס את כל הרוחב */
         .invitation-header { 
             width: 100%; 
             display: block; 
-            background-color: #ffffff;
+            line-height: 0;
         }
         
         .invitation-header img { 
@@ -30,9 +31,10 @@
 
         /* חלק אישור ההגעה - מופיע רק בגלילה */
         .rsvp-section { 
-            padding: 60px 20px; 
+            padding: 80px 20px; 
             background-color: #ffffff; 
             border-top: 1px solid #eee;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.03);
         }
 
         h2 { font-size: 2.2em; color: #b5952f; margin-bottom: 10px; }
@@ -70,10 +72,7 @@
 <body>
 
     <div class="invitation-header">
-        <img src="https://api.screenshotmachine.com/?key=YOUR_KEY&url=https://webbing-web-i-s.vercel.app/&dimension=1024x768" 
-             onerror="this.src='https://i.ibb.co/L5r2p5h/olive-branches.png'" 
-             alt="הזמנה לחתונה" 
-             id="main-invite">
+        <img src="66122.jpg" onerror="this.src='66122.JPG'" alt="הזמנה לחתונה">
     </div>
 
     <div class="rsvp-section">
@@ -81,16 +80,16 @@
         <p id="guest-greeting">אורח/ת יקר/ה, נשמח מאוד לראותכם!</p>
         
         <div class="rsvp-buttons">
-            <button class="rsvp-btn" type="button" onclick="selectRSVP('אולי מגיע')">
-                <span>❓</span>
+            <button class="rsvp-btn" type="button" onclick="selectRSVP('אולי')">
+                <span style="font-size: 1.5em;">❓</span>
                 <span>אולי</span>
             </button>
-            <button class="rsvp-btn" type="button" onclick="selectRSVP('מגיע בשמחה')">
-                <span>✅</span>
+            <button class="rsvp-btn" type="button" onclick="selectRSVP('מגיע/ה')">
+                <span style="font-size: 1.5em;">✅</span>
                 <span>אגיע</span>
             </button>
-            <button class="rsvp-btn" type="button" onclick="selectRSVP('לא יכול להגיע')">
-                <span>❌</span>
+            <button class="rsvp-btn" type="button" onclick="selectRSVP('לא מגיע/ה')">
+                <span style="font-size: 1.5em;">❌</span>
                 <span>לא אגיע</span>
             </button>
         </div>
@@ -106,7 +105,7 @@
         const guestName = urlParams.get('name');
 
         if (guestName) {
-            document.getElementById('guest-greeting').innerText = `היי ${guestName}, נשמח לראותכם!`;
+            document.getElementById('guest-greeting').innerText = `היי ${guestName}, נשמח לראותכם בחתונה של עילאי ושיראל!`;
             document.getElementById('hidden-name').value = guestName;
         }
 
