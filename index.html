@@ -3,69 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>עילאי ושיראל - הזמנה לחתונה</title>
-    <link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;700&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    <title>עילאי ושיראל מתחתנים - הזמנה לחתונה</title>
+    <link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;700&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
     <style>
+        /* הגדרות כלליות */
         body {
             font-family: 'David Libre', serif;
-            background-color: #ffffff;
+            background-color: #fdfdfd;
             margin: 0;
-            color: #333;
+            color: #444;
             text-align: center;
+        }
+
+        /* מכולה מרכזית להזמנה */
+        .invitation-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 10px;
+            /* הוספת עלי זית בצדדים, כמו בתמונה המקורית ששלחת */
             background-image: url('https://i.ibb.co/L5r2p5h/olive-branches.png'), url('https://i.ibb.co/L5r2p5h/olive-branches.png');
-            background-position: top left, top right;
+            background-position: top left, bottom right;
             background-repeat: no-repeat, no-repeat;
             background-size: 150px, 150px;
         }
 
-        .invitation-body {
-            padding: 100px 20px 40px 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
+        /* הפסוק בכתב יד-זהוב */
         .shir-hashirim {
-            font-family: 'Amatic SC', cursive;
-            font-size: 1.6em;
-            color: #555;
-            margin-bottom: 25px;
-            letter-spacing: 1px;
-        }
-
-        .invite-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
             font-size: 1.1em;
-            font-weight: bold;
-            line-height: 1.6;
+            color: #d4af37; /* צבע זהב */
             margin-bottom: 30px;
+            letter-spacing: 0.5px;
         }
 
-        /* עיצוב שמות המתחתנים */
+        /* השמות המרכזיים - בזהב מודגש */
         .names {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px; /* רווח קטן */
             margin-bottom: 30px;
         }
         .groom, .bride {
-            font-size: 2.8em;
+            font-size: 3em;
             font-weight: 700;
+            color: #d4af37; /* צבע זהב */
         }
         .and-word {
-            font-size: 1.8em;
-            color: #777;
+            font-size: 2.5em;
             font-weight: 400;
+            margin: 0 10px;
         }
 
-        .details {
+        /* טקסט הזמנה */
+        .invite-text {
             font-size: 1.1em;
+            font-weight: bold;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        /* פרטי האירוע */
+        .details {
+            font-size: 1.2em;
             line-height: 1.6;
             margin-bottom: 40px;
         }
         .details span {
             font-weight: bold;
+            color: #d4af37; /* צבע זהב */
         }
 
+        /* שמות ההורים - המעודכנים! */
+        .parents {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 60px;
+        }
+        .parent-group span {
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        /* חלק אישור ההגעה */
         .rsvp-section {
             background-color: #f9f9f9;
             padding: 40px 20px;
@@ -73,18 +96,18 @@
         }
 
         h2 {
-            font-family: 'Amatic SC', cursive;
-            font-size: 2.5em;
-            color: #d4af37;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: #444;
             margin-bottom: 10px;
         }
 
         #guest-greeting {
-            font-size: 1.2em;
+            font-size: 1.1em;
             margin-bottom: 30px;
-            color: #333;
         }
 
+        /* כפתורי אישור ההגעה - בסגנון הכפתורים מהתמונה המקורית ששלחת */
         .rsvp-buttons {
             display: flex;
             justify-content: center;
@@ -97,23 +120,30 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            border: 2px solid #ff7a8a;
+            border: 1px solid #ff7a8a; /* צבע אדום-ורוד מההזמנה */
             background-color: transparent;
             color: #ff7a8a;
-            font-size: 1em;
+            font-size: 0.9em;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        .rsvp-btn:active {
+        /* אייקונים בתוך הכפתורים */
+        .rsvp-btn i {
+            font-size: 1.8em;
+            margin-bottom: 3px;
+        }
+
+        .rsvp-btn.selected {
             background-color: #ff7a8a;
             color: white;
         }
 
+        /* טופס נסתר */
         #hidden-rsvp-form {
             display: none;
         }
@@ -121,13 +151,18 @@
 </head>
 <body>
 
-    <div class="invitation-body">
+    <div class="invitation-container">
         <div class="shir-hashirim">
             שושן אשמח בה' תגל נפשי באלוהי כי הלבישני בגדי ישע מעיל צדקה יעטני כחתן
             <br>
             יכהן פאר וככלה תעטה כליה
             <br>
             (ישעיה ס"א י"א)
+        </div>
+
+        <div class="names">
+            <span class="groom">עילאי</span>
+            <span class="and-word">ושיראל</span>
         </div>
         
         <div class="invite-text">
@@ -138,20 +173,25 @@
             בשמחת נישואינו
         </div>
 
-        <div class="names">
-            <span class="groom">עילאי</span>
-            <span class="and-word">ו</span>
-            <span class="bride">שיראל</span>
-        </div>
-
         <div class="details">
             שתתקיים אי"ה ביום שלישי
             <br>
             <span>כ"ה אייר (12.5.26)</span>
             <br>
-            בשעה 19:30 באולמי שלוש,
-            <br>
-            הוד 3 אור יהודה
+            בשעה 19:30 באולמי שלוש, הוד 3 אור יהודה
+        </div>
+
+        <div class="parents">
+            <div class="parent-group">
+                <span>הורי החתן:</span>
+                <br>
+                ירון ואפרת
+            </div>
+            <div class="parent-group">
+                <span>הורי הכלה:</span>
+                <br>
+                אריק ובלהה
+            </div>
         </div>
     </div>
 
@@ -186,4 +226,15 @@
         const guestName = urlParams.get('name');
 
         if (guestName) {
-            document.getElementById('guest-greeting').innerText = `היי ${guestName}, נשמח
+            document.getElementById('guest-greeting').innerText = `היי ${guestName}, נשמח לראותכם!`;
+            document.getElementById('hidden-name').value = guestName;
+        }
+
+        function selectRSVP(status) {
+            document.getElementById('hidden-status').value = status;
+            alert("תודה רבה! תשובתך נשלחה.");
+            document.getElementById('hidden-rsvp-form').submit();
+        }
+    </script>
+</body>
+</html>
