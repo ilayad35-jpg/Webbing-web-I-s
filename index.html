@@ -8,7 +8,7 @@
         :root {
             --gold: #b5952f;
             --light-gold: #f4eee0;
-            --bg: #ffffff; /* רקע לבן נקי חזר */
+            --bg: #ffffff;
             --text: #333;
             --waze-blue: #33ccff;
         }
@@ -23,7 +23,6 @@
             overflow-x: hidden;
         }
         
-        /* תמונת ההזמנה */
         .invitation-header { 
             width: 100%; 
             background-color: #fff;
@@ -38,7 +37,6 @@
             margin: 0 auto; 
         }
 
-        /* חלק אישור ההגעה (הסקר) */
         .rsvp-section { 
             padding: 50px 20px 80px 20px; 
             max-width: 450px;
@@ -112,9 +110,6 @@
         .btn-maybe { color: #ef6c00; }
         .btn-no { color: #c62828; }
 
-        .rsvp-btn:active { transform: scale(0.98); opacity: 0.8; }
-
-        /* כפתור מוזיקה עדין */
         #music-note {
             position: fixed;
             bottom: 20px;
@@ -128,7 +123,6 @@
             z-index: 1000;
         }
 
-        /* כפתור Waze - חדש */
         .waze-btn-container {
             margin-top: 50px;
             margin-bottom: 40px;
@@ -150,24 +144,14 @@
             border: none;
             cursor: pointer;
         }
-
-        .waze-btn:active {
-            background-color: #00ace6;
-            transform: translateY(2px);
-            box-shadow: 0 2px 8px rgba(51, 204, 255, 0.3);
-        }
-
-        .waze-icon {
-            margin-left: 10px;
-            font-size: 1.4em;
-        }
     </style>
 </head>
 <body onclick="playMusic()">
 
-    <div id="music-note">🎵</div>
-    <audio id="zushaMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    <div id="music-note" onclick="toggleMusic()">🎵</div>
+    
+    <audio id="backgroundMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
     </audio>
 
     <div class="invitation-header">
@@ -201,33 +185,43 @@
 
         <div class="waze-btn-container">
             <a href="waze://?q=אולם אירועים גן עדן" class="waze-btn">
-                <span class="waze-icon">🚗</span> ניווט לוויז (Waze)
+                <span>🚗</span> ניווט לוויז (Waze)
             </a>
         </div>
     </div>
 
     <script>
-        // הפעלת מוזיקה (זושא)
+        let isPlaying = false;
+        const audio = document.getElementById('backgroundMusic');
+
         function playMusic() {
-            document.getElementById('zushaMusic').play().catch(() => {});
+            if (!isPlaying) {
+                audio.play().then(() => {
+                    isPlaying = true;
+                }).catch(e => console.log("Music play blocked"));
+            }
         }
 
-        // טיפול בשם אורח מהקישור
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+            } else {
+                audio.play();
+                isPlaying = true;
+            }
+        }
+
         const urlParams = new URLSearchParams(window.location.search);
         const guestName = urlParams.get('name');
         if (guestName) {
             document.getElementById('guest-greeting').innerHTML = `היי <strong>${guestName}</strong>,<br>נשמח לראותכם בחתונה של עילאי ושיראל!`;
         }
 
-        // שליחת ה-RSVP
         function sendRSVP(status) {
             const count = document.getElementById('guest-count').value;
             const msg = document.getElementById('guest-message').value;
-            
-            let summary = `סטטוס: ${status}\nכמות: ${count}`;
-            if(msg) summary += `\nהודעה: ${msg}`;
-            
-            alert("תודה! הפרטים נשלחו (בהמשך נחבר את Formspree):\n" + summary);
+            alert("תודה! הפרטים נשלחו:\nסטטוס: " + status + "\nכמות: " + count);
         }
     </script>
 </body>
