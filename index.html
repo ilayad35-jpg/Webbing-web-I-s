@@ -8,24 +8,33 @@
         :root {
             --gold: #b5952f;
             --light-gold: #f4eee0;
-            --bg: #fcfaf7;
-            --text: #444;
+            --bg-creme: #fdfaf5; /* צבע שמנת בסיסי */
+            --text: #333;
         }
 
         body { 
             margin: 0; 
             padding: 0; 
-            background-color: var(--bg); 
+            /* רקע עדין מאוד של ענפי זית מוזהבים */
+            background-color: var(--bg-creme);
+            background-image: url('https://i.ibb.co/L5r2p5h/olive-branches.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            
             text-align: center; 
             font-family: system-ui, -apple-system, sans-serif; 
             color: var(--text);
         }
         
+        /* תמונת ההזמנה - נשארת נקייה למעלה */
         .invitation-header { 
             width: 100%; 
             background-color: #fff;
             line-height: 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            position: relative;
+            z-index: 10;
         }
         
         .invitation-header img { 
@@ -36,33 +45,38 @@
             margin: 0 auto; 
         }
 
+        /* חלק אישור ההגעה (הסקר) */
         .rsvp-section { 
-            padding: 40px 20px 80px 20px; 
+            padding: 50px 20px 100px 20px; 
             max-width: 450px;
             margin: 0 auto;
+            position: relative;
+            z-index: 5;
         }
 
+        /* כרטיס ה-RSVP */
         .rsvp-card {
-            background: white;
-            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.96); /* לבן כמעט אטום כדי שהטקסט יהיה קריא */
+            padding: 35px 25px;
             border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid var(--light-gold);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            border: 1px solid rgba(181, 149, 47, 0.15); /* גבול זהב עדין מאוד */
         }
 
         h2 { 
             font-size: 2em; 
             color: var(--gold); 
-            margin-bottom: 5px;
+            margin: 0 0 8px 0;
             font-weight: 300;
         }
 
         #guest-greeting { 
             font-size: 1.1em; 
-            margin-bottom: 30px; 
+            margin-bottom: 35px; 
             line-height: 1.5;
         }
 
+        /* שדות קלט (סלקט וטקסט-אריאה) */
         .input-group {
             margin-bottom: 25px;
             text-align: right;
@@ -71,120 +85,4 @@
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
-            color: var(--gold);
-            font-size: 0.9em;
-        }
-
-        select, textarea {
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            border: 1px solid #ddd;
-            font-family: inherit;
-            font-size: 1em;
-            box-sizing: border-box;
-            background-color: #fafafa;
-        }
-
-        textarea { height: 80px; resize: none; }
-
-        .rsvp-buttons { 
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .rsvp-btn { 
-            padding: 15px;
-            border-radius: 15px; 
-            border: 1px solid #eee; 
-            background-color: white; 
-            cursor: pointer; 
-            transition: all 0.2s;
-            font-weight: 600;
-        }
-
-        .btn-yes { background-color: #f0f7f0; color: #2e7d32; border-color: #c8e6c9; grid-column: span 2; font-size: 1.2em; }
-        .btn-maybe { color: #ef6c00; }
-        .btn-no { color: #c62828; }
-
-        .rsvp-btn:active { transform: scale(0.98); opacity: 0.8; }
-
-        #music-note {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            font-size: 20px;
-            background: white;
-            padding: 10px;
-            border-radius: 50%;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body onclick="playMusic()">
-
-    <div id="music-note">🎵</div>
-    <audio id="zushaMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
-
-    <div class="invitation-header">
-        <img src="IMG_20260323_092539.jpg" alt="הזמנה לחתונה">
-    </div>
-
-    <div class="rsvp-section">
-        <div class="rsvp-card">
-            <h2>אישור הגעה</h2>
-            <p id="guest-greeting">נשמח מאוד לראותכם!</p>
-            
-            <div class="input-group">
-                <label>כמות אורחים מגיעים:</label>
-                <select id="guest-count">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>משהו שתרצו להגיד לנו?</label>
-                <textarea id="guest-message" placeholder="כתבו כאן ברכה או הערה..."></textarea>
-            </div>
-
-            <div class="rsvp-buttons">
-                <button class="rsvp-btn btn-yes" onclick="sendRSVP('מגיע/ה')">אגיע בשמחה! ✅</button>
-                <button class="rsvp-btn btn-maybe" onclick="sendRSVP('אולי')">אולי ❓</button>
-                <button class="rsvp-btn btn-no" onclick="sendRSVP('לא אגיע')">לא אוכל ❌</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function playMusic() {
-            document.getElementById('zushaMusic').play().catch(() => {});
-        }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const guestName = urlParams.get('name');
-        if (guestName) {
-            document.getElementById('guest-greeting').innerHTML = `היי <strong>${guestName}</strong>,<br>נשמח לראותכם בחתונה של עילאי ושיראל!`;
-        }
-
-        function sendRSVP(status) {
-            const count = document.getElementById('guest-count').value;
-            const msg = document.getElementById('guest-message').value;
-            
-            let summary = `סטטוס: ${status}\nכמות: ${count}`;
-            if(msg) summary += `\nהודעה: ${msg}`;
-            
-            alert("תודה! הפרטים נשלחו:\n" + summary);
-        }
-    </script>
-</body>
-</html>
+            font-weight:
