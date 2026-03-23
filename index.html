@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>החתונה של [שם החתן] ו[שם הכלה]</title>
+    <style>
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); /* טקסטורה עדינה */
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px dashed #d4af37; /* צבע זהב */
+        }
+        h1 {
+            font-size: 3em;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+        .date {
+            font-size: 1.5em;
+            letter-spacing: 2px;
+        }
+        .decor {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+        .rsvp-section {
+            padding: 50px 20px;
+            background-color: #fcfcfc;
+        }
+        h2 {
+            font-size: 2em;
+            color: #555;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        select, input, button {
+            padding: 10px;
+            font-size: 1.2em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #d4af37;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #b5952f;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="decor">🌿 💍 🌿</div>
+        <h1>מתן ושיר מתחתנים!</h1>
+        <div class="date">25.08.2026 | גן האירועים "האחוזה"</div>
+        <div class="decor">✨ גללו למטה לאישור הגעה ✨</div>
+    </div>
+
+    <div class="rsvp-section">
+        <h2 id="guest-greeting">אורח/ת יקר/ה, נשמח לראותכם!</h2>
+        
+        <form action="ACTION_URL" method="POST">
+            <input type="hidden" id="hidden-name" name="שם האורח">
+            
+            <label for="status">האם תגיעו לחגוג איתנו?</label>
+            <select id="status" name="סטטוס הגעה" required>
+                <option value="" disabled selected>בחרו תשובה...</option>
+                <option value="מגיע בשמחה">ברור, מגיע/ה בשמחה!</option>
+                <option value="לא יכול להגיע">לצערי לא אוכל להגיע</option>
+            </select>
+
+            <label for="count">אם כן, כמה אתם סך הכל?</label>
+            <input type="number" id="count" name="כמות מגיעים" min="1" max="10" placeholder="למשל: 2">
+
+            <button type="submit">שלח אישור הגעה</button>
+        </form>
+    </div>
+
+    <script>
+        // קריאת שם האורח מהקישור
+        const urlParams = new URLSearchParams(window.location.search);
+        const guestName = urlParams.get('name');
+
+        if (guestName) {
+            // החלפת הברכה בשם האישי
+            document.getElementById('guest-greeting').innerText = `היי ${guestName}, נשמח לראותך!`;
+            // הכנסת השם לטופס הנסתר כדי שנדע מי ענה
+            document.getElementById('hidden-name').value = guestName;
+        }
+    </script>
+</body>
+</html>
