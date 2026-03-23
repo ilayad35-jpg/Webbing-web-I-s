@@ -13,7 +13,6 @@
             font-family: system-ui, -apple-system, sans-serif; 
         }
         
-        /* חלק ההזמנה - נקי לגמרי ותופס את ראש הדף */
         .invitation-header { 
             width: 100%; 
             display: block; 
@@ -29,7 +28,6 @@
             margin: 0 auto; 
         }
 
-        /* חלק אישור ההגעה - מופיע רק בגלילה */
         .rsvp-section { 
             padding: 60px 20px; 
             background-color: #ffffff; 
@@ -65,53 +63,61 @@
 
         .rsvp-btn:active { background-color: #ff7a8a; color: white; }
         
-        #hidden-rsvp-form { display: none; }
+        #music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.8);
+            border: 1px solid #ff7a8a;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
     </style>
 </head>
-<body>
+<body onclick="playMusic()">
+
+    <audio id="zushaMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    <div id="music-btn">🎵</div>
 
     <div class="invitation-header">
-        <img src="https://i.postimg.cc/mD8P8v9q/66122.jpg" alt="הזמנה לחתונה">
+        <img src="IMG_20260323_092539.jpg" alt="הזמנה לחתונה">
     </div>
 
     <div class="rsvp-section">
         <h2>אישור הגעה</h2>
-        <p id="guest-greeting">אורח/ת יקר/ה, נשמח מאוד לראותכם!</p>
+        <p id="guest-greeting">אורח/ת יקר/ה, נשמח לראותכם!</p>
         
         <div class="rsvp-buttons">
-            <button class="rsvp-btn" type="button" onclick="selectRSVP('אולי')">
-                <span style="font-size: 1.5em;">❓</span>
-                <span>אולי</span>
-            </button>
-            <button class="rsvp-btn" type="button" onclick="selectRSVP('אגיע בשמחה')">
-                <span style="font-size: 1.5em;">✅</span>
-                <span>אגיע</span>
-            </button>
-            <button class="rsvp-btn" type="button" onclick="selectRSVP('לא אגיע')">
-                <span style="font-size: 1.5em;">❌</span>
-                <span>לא אגיע</span>
-            </button>
+            <button class="rsvp-btn" onclick="selectRSVP('אולי')"><span>❓</span><span>אולי</span></button>
+            <button class="rsvp-btn" onclick="selectRSVP('אגיע בשמחה')"><span>✅</span><span>אגיע</span></button>
+            <button class="rsvp-btn" onclick="selectRSVP('לא אגיע')"><span>❌</span><span>לא אגיע</span></button>
         </div>
-
-        <form action="https://formspree.io/f/YOUR_ID" method="POST" id="hidden-rsvp-form">
-            <input type="hidden" id="hidden-name" name="שם האורח">
-            <input type="hidden" id="hidden-status" name="סטטוס">
-        </form>
     </div>
 
     <script>
+        // הפעלת מוזיקה
+        function playMusic() {
+            const audio = document.getElementById('zushaMusic');
+            audio.play().catch(() => {});
+        }
+
         const urlParams = new URLSearchParams(window.location.search);
         const guestName = urlParams.get('name');
-
         if (guestName) {
             document.getElementById('guest-greeting').innerText = `היי ${guestName}, נשמח לראותכם בחתונה של עילאי ושיראל!`;
-            document.getElementById('hidden-name').value = guestName;
         }
 
         function selectRSVP(status) {
-            document.getElementById('hidden-status').value = status;
-            alert("תודה! התשובה נשלחה.");
-            document.getElementById('hidden-rsvp-form').submit();
+            alert("תודה! התשובה (" + status + ") נשלחה.");
         }
     </script>
 </body>
