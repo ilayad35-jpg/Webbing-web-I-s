@@ -13,12 +13,12 @@
             font-family: system-ui, -apple-system, sans-serif; 
         }
         
-        /* חלק ההזמנה - נקי למעלה */
+        /* ההזמנה בראש הדף - נקייה */
         .invitation-header { 
             width: 100%; 
             display: block; 
-            background-color: #ffffff;
             line-height: 0;
+            background-color: #fff;
         }
         
         .invitation-header img { 
@@ -29,7 +29,7 @@
             margin: 0 auto; 
         }
 
-        /* חלק אישור ההגעה - מופיע רק בגלילה */
+        /* חלק אישור ההגעה - בגלילה למטה */
         .rsvp-section { 
             padding: 60px 20px; 
             background-color: #ffffff; 
@@ -66,12 +66,36 @@
         .rsvp-btn:active { background-color: #ff7a8a; color: white; }
         
         #hidden-rsvp-form { display: none; }
+
+        /* כפתור שליטה במוזיקה */
+        #music-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.9);
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
-<body>
+<body onclick="startMusic()">
+
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+
+    <div id="music-toggle">🎵</div>
 
     <div class="invitation-header">
-        <img src="https://i.ibb.co/v6W7p5y/final-invite.jpg" alt="הזמנה לחתונה">
+        <img src="https://i.ibb.co/FbfTsBTh/66122.jpg" alt="הזמנה לחתונה">
     </div>
 
     <div class="rsvp-section">
@@ -100,10 +124,33 @@
     </div>
 
     <script>
+        // הפעלת מוזיקה
+        let musicPlaying = false;
+        function startMusic() {
+            const audio = document.getElementById('bg-music');
+            if (!musicPlaying) {
+                audio.play();
+                musicPlaying = true;
+            }
+        }
+
+        // טיפול בשם אורח
         const urlParams = new URLSearchParams(window.location.search);
         const guestName = urlParams.get('name');
 
         if (guestName) {
+            document.getElementById('guest-greeting').innerText = `היי ${guestName}, נשמח לראותכם!`;
+            document.getElementById('hidden-name').value = guestName;
+        }
+
+        function selectRSVP(status) {
+            document.getElementById('hidden-status').value = status;
+            alert("תודה! התשובה נשלחה.");
+            document.getElementById('hidden-rsvp-form').submit();
+        }
+    </script>
+</body>
+</html>
             document.getElementById('guest-greeting').innerText = `היי ${guestName}, נשמח לראותכם!`;
             document.getElementById('hidden-name').value = guestName;
         }
