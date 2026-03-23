@@ -188,11 +188,102 @@
                 ירון ואפרת
             </div>
             <div class="parent-group">
-                <span>הורי הכלה:</span>
-                <br>
-                אריק ובלהה
-            </div>
-        </div>
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>עילאי ושיראל - הזמנה לחתונה</title>
+    <link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* הגדרות כלליות */
+        body {
+            font-family: 'David Libre', serif;
+            background-color: #fcfaf7; /* שמנת עדינה כדי להתאים לתמונה */
+            margin: 0;
+            text-align: center;
+            color: #444;
+        }
+
+        /* מכולה לתמונת ההזמנה */
+        .invitation-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* צל עדין שנותן עומק */
+        }
+
+        /* עיצוב התמונה שהעלית לגיטהאב */
+        .invitation-container img {
+            width: 100%; /* התמונה תתפוס את כל רוחב המסך בטלפון */
+            height: auto; /* שומר על יחס הגובה-רוחב */
+            border-bottom: 2px dashed #d4af37; /* קו זהב עדין מתחת לתמונה */
+        }
+
+        /* חלק אישור ההגעה */
+        .rsvp-section {
+            background-color: #f9f9f9;
+            padding: 40px 20px;
+            border-top: 1px solid #eee;
+        }
+
+        h2 {
+            font-family: 'David Libre', serif;
+            font-size: 2.2em;
+            color: #d4af37; /* צבע זהב לכותרת */
+            margin-bottom: 10px;
+        }
+
+        /* התאמה אישית של הברכה */
+        #guest-greeting {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* כפתורי אישור הגעה עגולים */
+        .rsvp-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* סגנון כללי לכפתור */
+        .rsvp-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%; /* כפתור עגול */
+            border: 2px solid #ff7a8a; /* צבע מההזמנה */
+            background-color: transparent;
+            color: #ff7a8a;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        /* סגנון כשהכפתור נבחר (דומה לצבע המלא בתמונה) */
+        .rsvp-btn.selected {
+            background-color: #ff7a8a;
+            color: white;
+        }
+
+        /* עיצוב הטופס הנסתר */
+        #hidden-rsvp-form {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="invitation-container">
+        <img src="final_invitation.jpg" alt="הזמנה לחתונה">
     </div>
 
     <div class="rsvp-section">
@@ -222,17 +313,23 @@
     </div>
 
     <script>
+        // קריאת שם האורח מהקישור
         const urlParams = new URLSearchParams(window.location.search);
         const guestName = urlParams.get('name');
 
         if (guestName) {
-            document.getElementById('guest-greeting').innerText = `היי ${guestName}, נשמח לראותכם!`;
+            // החלפת הברכה בשם האישי
+            document.getElementById('guest-greeting').innerText = `היי ${guestName}, נשמח לראותכם בחתונה שלנו!`;
+            // הכנסת השם לטופס הנסתר כדי שנדע מי ענה
             document.getElementById('hidden-name').value = guestName;
         }
 
+        // פונקציה לבחירת תשובה ולשליחת הטופס
         function selectRSVP(status) {
+            // הכנסת התשובה לטופס הנסתר
             document.getElementById('hidden-status').value = status;
             alert("תודה רבה! תשובתך נשלחה.");
+            // שליחת הטופס
             document.getElementById('hidden-rsvp-form').submit();
         }
     </script>
