@@ -1,86 +1,189 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="he">
-<head> 
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;600&family=Tinos:italic&display=swap" rel="stylesheet">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>החתונה של [עילאי] ו[שיראל]</title>
+    <title>עילאי ושיראל - הזמנה לחתונה</title>
+    <link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;700&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
-    body {
-        font-family: 'Assistant', sans-serif;
-        background-color: #fcfaf7; /* שמנת עדינה */
-        margin: 0;
-        text-align: center;
-    }
-    .hero {
-        padding: 40px 20px;
-        background: white;
-    }
-    .rsvp-section {
-        background: white;
-        margin: 20px;
-        padding: 30px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* צל עדין שנותן עומק */
-    }
-    input, select, button {
-        width: 100%;
-        margin-top: 10px;
-        height: 50px;
-        border-radius: 25px; /* פינות עגולות ומודרניות */
-        border: 1px solid #eee;
-        text-align: center;
-    }
-    button {
-        background: linear-gradient(135deg, #d4af37, #b5952f);
-        color: white;
-        border: none;
-        font-weight: bold;
-        letter-spacing: 1px;
-    }
-</style>
+        body {
+            font-family: 'David Libre', serif;
+            background-color: #ffffff;
+            margin: 0;
+            color: #333;
+            text-align: center;
+            background-image: url('https://i.ibb.co/L5r2p5h/olive-branches.png'), url('https://i.ibb.co/L5r2p5h/olive-branches.png');
+            background-position: top left, top right;
+            background-repeat: no-repeat, no-repeat;
+            background-size: 150px, 150px;
+        }
 
+        .invitation-body {
+            padding: 100px 20px 40px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .shir-hashirim {
+            font-family: 'Amatic SC', cursive;
+            font-size: 1.6em;
+            color: #555;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .invite-text {
+            font-size: 1.1em;
+            font-weight: bold;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* עיצוב שמות המתחתנים */
+        .names {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px; /* רווח קטן */
+            margin-bottom: 30px;
+        }
+        .groom, .bride {
+            font-size: 2.8em;
+            font-weight: 700;
+        }
+        .and-word {
+            font-size: 1.8em;
+            color: #777;
+            font-weight: 400;
+        }
+
+        .details {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+        .details span {
+            font-weight: bold;
+        }
+
+        .rsvp-section {
+            background-color: #f9f9f9;
+            padding: 40px 20px;
+            border-top: 1px solid #eee;
+        }
+
+        h2 {
+            font-family: 'Amatic SC', cursive;
+            font-size: 2.5em;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+
+        #guest-greeting {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .rsvp-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .rsvp-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid #ff7a8a;
+            background-color: transparent;
+            color: #ff7a8a;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .rsvp-btn:active {
+            background-color: #ff7a8a;
+            color: white;
+        }
+
+        #hidden-rsvp-form {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="hero">
-        <div class="decor">🌿 💍 🌿</div>
-        <h1>עילאי ושיראל מתחתנים!</h1>
-        <div class="date">25.08.2026 | גן האירועים "האחוזה"</div>
-        <div class="decor">✨ גללו למטה לאישור הגעה ✨</div>
+    <div class="invitation-body">
+        <div class="shir-hashirim">
+            שושן אשמח בה' תגל נפשי באלוהי כי הלבישני בגדי ישע מעיל צדקה יעטני כחתן
+            <br>
+            יכהן פאר וככלה תעטה כליה
+            <br>
+            (ישעיה ס"א י"א)
+        </div>
+        
+        <div class="invite-text">
+            בשבח והודיה להשם יתברך
+            <br>
+            אנו נרגשים להזמינכם לשמוח
+            <br>
+            בשמחת נישואינו
+        </div>
+
+        <div class="names">
+            <span class="groom">עילאי</span>
+            <span class="and-word">ו</span>
+            <span class="bride">שיראל</span>
+        </div>
+
+        <div class="details">
+            שתתקיים אי"ה ביום שלישי
+            <br>
+            <span>כ"ה אייר (12.5.26)</span>
+            <br>
+            בשעה 19:30 באולמי שלוש,
+            <br>
+            הוד 3 אור יהודה
+        </div>
     </div>
 
     <div class="rsvp-section">
-        <h2 id="guest-greeting">אורח/ת יקר/ה, נשמח לראותכם!</h2>
+        <h2>אישור הגעה</h2>
+        <p id="guest-greeting">אורח/ת יקר/ה, נשמח מאוד לראותכם!</p>
         
-        <form action="https://formspree.io/f/xgonjpwo" method="POST">
+        <div class="rsvp-buttons">
+            <button class="rsvp-btn" type="button" onclick="selectRSVP('אולי מגיע')">
+                ❓
+                <span>אולי אגיע</span>
+            </button>
+            <button class="rsvp-btn" type="button" onclick="selectRSVP('מגיע בשמחה')">
+                ✅
+                <span>אגיע</span>
+            </button>
+            <button class="rsvp-btn" type="button" onclick="selectRSVP('לא יכול להגיע')">
+                ❌
+                <span>לא אגיע</span>
+            </button>
+        </div>
+
+        <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST" id="hidden-rsvp-form">
             <input type="hidden" id="hidden-name" name="שם האורח">
-            
-            <label for="status">האם תגיעו לחגוג איתנו?</label>
-            <select id="status" name="סטטוס הגעה" required>
-                <option value="" disabled selected>בחרו תשובה...</option>
-                <option value="מגיע בשמחה">ברור, מגיע/ה בשמחה!</option>
-                <option value="לא יכול להגיע">לצערי לא אוכל להגיע</option>
-            </select>
-
-            <label for="count">אם כן, כמה אתם סך הכל?</label>
-            <input type="number" id="count" name="כמות מגיעים" min="1" max="10" placeholder="למשל: 2">
-
-            <button type="submit">שלח אישור הגעה</button>
+            <input type="hidden" id="hidden-status" name="סטטוס הגעה" required>
+            <button type="submit" id="submit-rsvp" style="display:none;"></button>
         </form>
     </div>
 
     <script>
-        // קריאת שם האורח מהקישור
         const urlParams = new URLSearchParams(window.location.search);
         const guestName = urlParams.get('name');
 
         if (guestName) {
-            // החלפת הברכה בשם האישי
-            document.getElementById('guest-greeting').innerText = `היי ${guestName}, נשמח לראותך!`;
-            // הכנסת השם לטופס הנסתר כדי שנדע מי ענה
-            document.getElementById('hidden-name').value = guestName;
-        }
-    </script>
-</body>
-</html>
+            document.getElementById('guest-greeting').innerText = `היי ${guestName}, נשמח
