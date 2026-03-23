@@ -20,139 +20,54 @@
             text-align: center; 
             font-family: system-ui, -apple-system, sans-serif; 
             color: var(--text);
-            overflow-x: hidden;
         }
         
-        .invitation-header { 
-            width: 100%; 
-            background-color: #fff;
-            line-height: 0;
-        }
-        
-        .invitation-header img { 
-            width: 100%; 
-            max-width: 600px; 
-            height: auto; 
-            display: block; 
-            margin: 0 auto; 
-        }
+        .invitation-header { width: 100%; background-color: #fff; line-height: 0; }
+        .invitation-header img { width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto; }
 
-        .rsvp-section { 
-            padding: 50px 20px 80px 20px; 
-            max-width: 450px;
-            margin: 0 auto;
-        }
-
+        .rsvp-section { padding: 40px 20px 80px 20px; max-width: 450px; margin: 0 auto; }
         .rsvp-card {
-            background: white;
-            padding: 30px 20px;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid var(--light-gold);
+            background: white; padding: 30px 20px; border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--light-gold);
         }
 
-        h2 { 
-            font-size: 2em; 
-            color: var(--gold); 
-            margin: 0 0 10px 0;
-            font-weight: 300;
-        }
+        h2 { font-size: 2em; color: var(--gold); margin-bottom: 10px; font-weight: 300; }
+        #guest-greeting { font-size: 1.1em; margin-bottom: 30px; }
 
-        #guest-greeting { 
-            font-size: 1.1em; 
-            margin-bottom: 30px; 
-            line-height: 1.5;
-        }
-
-        .input-group {
-            margin-bottom: 25px;
-            text-align: right;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: var(--gold);
-            font-size: 0.9em;
-        }
-
-        select, textarea {
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            border: 1px solid #ddd;
-            font-family: inherit;
-            font-size: 1em;
-            box-sizing: border-box;
-            background-color: #fff;
-        }
-
+        .input-group { margin-bottom: 25px; text-align: right; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--gold); }
+        select, textarea { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd; font-family: inherit; box-sizing: border-box; }
         textarea { height: 80px; resize: none; }
 
-        .rsvp-buttons { 
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .rsvp-btn { 
-            padding: 15px;
-            border-radius: 15px; 
-            border: 1px solid #eee; 
-            background-color: white; 
-            cursor: pointer; 
-            transition: all 0.2s;
-            font-weight: 600;
-        }
-
+        .rsvp-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .rsvp-btn { padding: 15px; border-radius: 15px; border: 1px solid #eee; background-color: white; cursor: pointer; font-weight: 600; }
         .btn-yes { background-color: #f0f7f0; color: #2e7d32; border-color: #c8e6c9; grid-column: span 2; font-size: 1.2em; }
         .btn-maybe { color: #ef6c00; }
         .btn-no { color: #c62828; }
 
-        #music-note {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            font-size: 18px;
-            background: white;
-            padding: 10px;
-            border-radius: 50%;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            cursor: pointer;
-            z-index: 1000;
-        }
-
-        .waze-btn-container {
-            margin-top: 50px;
-            margin-bottom: 40px;
-        }
-
+        /* כפתור Waze */
+        .waze-btn-container { margin-top: 40px; }
         .waze-btn {
-            background-color: var(--waze-blue);
-            color: white;
-            padding: 18px 30px;
-            border-radius: 50px;
-            font-size: 1.2em;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(51, 204, 255, 0.4);
-            transition: 0.3s;
-            border: none;
-            cursor: pointer;
+            background-color: var(--waze-blue); color: white; padding: 15px 25px;
+            border-radius: 50px; font-size: 1.1em; font-weight: bold; text-decoration: none;
+            display: inline-flex; align-items: center; box-shadow: 0 4px 12px rgba(51, 204, 255, 0.3);
+        }
+
+        /* נגן מוסתר */
+        #player { display: none; }
+        
+        #music-control {
+            position: fixed; bottom: 20px; left: 20px; background: white;
+            padding: 10px; border-radius: 50%; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer; z-index: 1000; font-size: 20px;
         }
     </style>
 </head>
-<body onclick="playMusic()">
+<body onclick="startMusic()">
 
-    <div id="music-note" onclick="toggleMusic()">🎵</div>
-    
-    <audio id="backgroundMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
-    </audio>
+    <div id="music-control" onclick="toggleMusic()">🎵</div>
+
+    <div id="player"></div>
 
     <div class="invitation-header">
         <img src="IMG_20260323_092539.jpg" alt="הזמנה לחתונה">
@@ -161,10 +76,10 @@
     <div class="rsvp-section">
         <div class="rsvp-card">
             <h2>אישור הגעה</h2>
-            <p id="guest-greeting">נשמח מאוד לראותכם!</p>
+            <p id="guest-greeting">נשמח לראותכם!</p>
             
             <div class="input-group">
-                <label>כמות אורחים מגיעים:</label>
+                <label>כמות אורחים:</label>
                 <select id="guest-count">
                     <option value="1">1</option><option value="2">2</option><option value="3">3</option>
                     <option value="4">4</option><option value="5">5</option><option value="6">6</option>
@@ -172,57 +87,62 @@
             </div>
 
             <div class="input-group">
-                <label>משהו שתרצו להגיד לנו?</label>
-                <textarea id="guest-message" placeholder="כתבו כאן ברכה או הערה..."></textarea>
+                <label>הודעה אישית:</label>
+                <textarea id="guest-message" placeholder="ברכה קטנה..."></textarea>
             </div>
 
             <div class="rsvp-buttons">
-                <button class="rsvp-btn btn-yes" onclick="sendRSVP('מגיע/ה בשמחה')">אגיע בשמחה! ✅</button>
+                <button class="rsvp-btn btn-yes" onclick="sendRSVP('מגיע')">אגיע בשמחה! ✅</button>
                 <button class="rsvp-btn btn-maybe" onclick="sendRSVP('אולי')">אולי ❓</button>
-                <button class="rsvp-btn btn-no" onclick="sendRSVP('לא אגיע')">לא אוכל ❌</button>
+                <button class="rsvp-btn btn-no" onclick="sendRSVP('לא מגיע')">לא אוכל ❌</button>
             </div>
         </div>
 
         <div class="waze-btn-container">
-            <a href="waze://?q=אולם אירועים גן עדן" class="waze-btn">
-                <span>🚗</span> ניווט לוויז (Waze)
+            <a href="https://waze.com/ul?q=אולם אירועים" class="waze-btn">
+                <span style="margin-left:8px">🚗</span> ניווט בוויז
             </a>
         </div>
     </div>
 
     <script>
-        let isPlaying = false;
-        const audio = document.getElementById('backgroundMusic');
+        // טעינת ה-API של יוטיוב
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        function playMusic() {
-            if (!isPlaying) {
-                audio.play().then(() => {
-                    isPlaying = true;
-                }).catch(e => console.log("Music play blocked"));
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0',
+                width: '0',
+                videoId: 'kXmiyWwfPAg', // ה-ID של ממעמקים - בן צור
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'kXmiyWwfPAg' },
+                events: { 'onReady': onPlayerReady }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // הנגן מוכן
+        }
+
+        function startMusic() {
+            if (player && player.playVideo) {
+                player.playVideo();
             }
         }
 
         function toggleMusic() {
-            if (isPlaying) {
-                audio.pause();
-                isPlaying = false;
-            } else {
-                audio.play();
-                isPlaying = true;
-            }
+            var state = player.getPlayerState();
+            if (state == 1) { player.pauseVideo(); } else { player.playVideo(); }
         }
 
         const urlParams = new URLSearchParams(window.location.search);
-        const guestName = urlParams.get('name');
-        if (guestName) {
-            document.getElementById('guest-greeting').innerHTML = `היי <strong>${guestName}</strong>,<br>נשמח לראותכם בחתונה של עילאי ושיראל!`;
-        }
+        const name = urlParams.get('name');
+        if (name) document.getElementById('guest-greeting').innerHTML = `היי <strong>${name}</strong>,<br>נשמח לראותכם!`;
 
-        function sendRSVP(status) {
-            const count = document.getElementById('guest-count').value;
-            const msg = document.getElementById('guest-message').value;
-            alert("תודה! הפרטים נשלחו:\nסטטוס: " + status + "\nכמות: " + count);
-        }
+        function sendRSVP(s) { alert("תודה! נשלח: " + s); }
     </script>
 </body>
 </html>
